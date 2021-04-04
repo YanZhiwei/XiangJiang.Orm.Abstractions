@@ -1,6 +1,4 @@
-﻿using System.Data;
-
-namespace XiangJiang.Orm.Abstractions
+﻿namespace XiangJiang.Orm.Abstractions
 {
     /// <summary>
     ///     业务单元操作接口
@@ -15,8 +13,7 @@ namespace XiangJiang.Orm.Abstractions
         /// <summary>
         ///     显式开启数据上下文事务
         /// </summary>
-        /// <param name="isolationLevel">指定连接的事务锁定行为</param>
-        void BeginTransaction(IsolationLevel isolationLevel = IsolationLevel.Unspecified);
+        void BeginTransaction();
 
         /// <summary>
         ///     提交当前上下文的事务更改
