@@ -1,27 +1,27 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace XiangJiang.Orm.Abstractions
 {
     /// <summary>
     ///     实体基类
     /// </summary>
-    public class ModelBase
+    public abstract class ModelBase<TPrimaryKey>
     {
         /// <summary>
         ///     默认构造函数
         /// </summary>
-        public ModelBase()
+        protected ModelBase()
         {
-            Id = Guid.NewGuid();
-            CreateTime = DateTime.Now;
-            ModifyTime = DateTime.Now;
+            CreateTime = DateTime.UtcNow;
+            ModifyTime = DateTime.UtcNow;
             Available = true;
         }
 
-        /// <summary>
-        ///     主键ID
-        /// </summary>
-        public Guid Id
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public virtual TPrimaryKey Id
         {
             get; // int, not null
             set;
@@ -49,5 +49,10 @@ namespace XiangJiang.Orm.Abstractions
         ///     记录是否可用
         /// </summary>
         public bool Available { get; set; }
+    }
+
+    public sealed class Person : ModelBase<Guid>
+    {
+        public string Name { get; set; }
     }
 }
